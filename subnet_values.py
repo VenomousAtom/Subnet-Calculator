@@ -246,7 +246,7 @@ def networkClassC(ip, cidr):
             # print(">> network_address:", ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(network_address), "   >> [USABLE HOST RANGE] :", ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(
             #     network_address), "-", ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(broadcast_address), "   >> broadcast_address:", ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(broadcast_address))
             subnet_ranges.append([ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(network_address), ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(
-                network_address), ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(broadcast_address), ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(broadcast_address)])
+                network_address + 1), ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(broadcast_address - 1), ip_addr[0] + "." + ip_addr[1] + "." + ip_addr[2] + "." + str(broadcast_address)])
 
             if int(ip_addr[3]) >= network_address:
                 if int(ip_addr[3]) <= broadcast_address:

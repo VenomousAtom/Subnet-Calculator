@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IP Subnet Calculator - Web</title>
+        <link rel="icon" type="image/png" href="../static/res/network.png">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/evalutate.css')}}">
+        <link rel="stylesheet" href="../static/css/evalutate.css">
+    </head>
+
+    <header>
+        <h1 class="app_title" style="color: white; text-transform: uppercase;">
+            <a href="/" style="z-index: 1; background-color: rgba(0,0,0,0); color: white; text-transform: uppercase; text-decoration: none;">IP SUBNET CALCULATOR</a>
+        </h1>
+    </header>
+    <body>
+       <div class="content" style="width: 100%;"> 
+            <form id="form" name="form" class="form" action="/result" method="POST">
+
+                <div style="text-align:center;" class="line1">
+
+                    <label style="font-size: 20px; position: relative; background-color: rgba(0,0,0,0);" for="Class">Class:</label>
+
+                    <select id="input1" name="input1" class="input1" style="position: relative; left: 30px;">
+                        <option value="Any">Any</option>
+                        <option value="A">Class A</option>
+                        <option value="B">Class B</option>
+                        <option value="C">Class C</option>
+                    </select>
+
+                </div>
+                <br>
+                <div class="IP">
+                    <div style="position: relative; text-align: center; left: 0px;" class="line2">
+                        <label style="font-size: 20px; position: relative; background-color: rgba(0,0,0,0);">IP Address: </label>
+                        <input type="text" id="input2" name="input2" class="input2" style="position: relative; left: 30px;" required>
+                    </div>
+                    {% if ip_val == 'INVALID' %}
+                    <style>
+                        .line2 {
+                            border: solid 5px red;
+                        }
+                    </style>
+                    <span class="iperror">
+                        <img src="/static/res/caution.png" style="height: 26px; margin: auto; vertical-align: middle;"/>
+                        {% if ip_val == 'INVALID' %}
+                        The IP Address is not in the Network Class Range.
+                        {% endif %}
+                        {% if ip_val == 'INVALID2' %}
+                        MultiCasting Addresses cannot be used.
+                        {% endif %}
+                        {% if ip_val == 'INVALID3' %}
+                        Experimental Addresses cannot be used.
+                        {% endif %}
+                    </span>
+                    {% endif %}
+                </div>
+                <br>
+
+                <div class="CIDR">
+                    <div style="position: relative; text-align: center; left: 95px" class="line3">
+                        <label style="font-size: 20px; position: relative; background-color: rgba(0,0,0,0);">CIDR: </label>
+                        <input type="number" id="input3" name="input3" class="input3" style="position: relative; left: 30px;" required>
+                    </div>
+                    {% if cidr_val == 'INVALID' and ip_val != 'INVALID' %}
+                    <style>
+                        .line3
+                        {
+                            border: solid 5px red;
+                        }
+                    </style>
+                    <span class="cidrerror">
+                        <img src="/static/res/caution.png" style="height: 26px; margin: auto; vertical-align: middle;" />
+                        The CIDR is not in the Network Class Range.
+                    </span>
+                    {% endif %}
+                </div>
+                <br>
+
+                <div class="Subnetmask">
+                    <div style="position: relative; text-align: center; left: 0px" class="line4">
+                        <label style="font-size: 20px; position: relative; background-color: rgba(0,0,0,0);">Subnet Mask: </label>
+                        <input type="text" id="input4" name="input4" class="input4" style="position: relative; width: 220px;" required>
+                    </div>
+                    <!-- {% if subma == 'INVALID' and cidr_val != 'INVALID' and ip_val != 'INVALID' %}
+                    <style>
+                        .line2
+                        {
+                            border: solid 5px red;
+                        }
+                    </style>
+                    <span class="iperror">
+                        <img src="/static/res/caution.png" style="height: 26px; margin: auto; vertical-align: middle;" />
+                        The CIDR is not in the Network Class Range.
+                    </span>
+                    {% endif %} -->
+                </div>
+                <br>
+                <div style="text-align: center;">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+
+            <!-- <div class="tooltip">
+                <img src="/static/res/twotone_info_black_24dp.png" style="background: white; padding: 0 0; border-radius: 50%; height: 30px; position: absolute; bottom: 10px; left: 10px;"/>
+                <span class="tooltiptext">
+                    - Class A networks use a default subnet mask of 255.0.0.0 and have 0-127 as their first octet. The address 10.52.36.11 is a class A address. Its first octet is 10, which is between 1 and 126, inclusive.<br><br>
+                    - Class B networks use a default subnet mask of 255.255.0.0 and have 128-191 as their first octet. The address 172.16.52.63 is a class B address. Its first octet is 172, which is between 128 and 191, inclusive.<br><br>
+                    - Class C networks use a default subnet mask of 255.255.255.0 and have 192-223 as their first octet. The address 192.168.123.132 is a class C address. Its first octet is 192, which is between 192 and 223, inclusive.<br><br>
+                    IP-Address/CIDR<br>
+                    eg. ( 192.168.1.0/27 ) Here CIDR is 27.<br>
+                    The Subnets will depend on the of CIDR Notation.
+                </span>
+            </div>
+        </div> -->
+    </body>
+</html>
